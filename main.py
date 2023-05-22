@@ -7,6 +7,7 @@ import adafruit_mlx90640
 
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
+from matplotlib.animation import PillowWriter
 
 i2c = busio.I2C(board.SCL, board.SDA, frequency=800000)
 
@@ -36,7 +37,12 @@ def update(i):
     plt.colorbar()
     plt.title("Animated MLX Thermal Camera (32x24)")
     plt.show()
-    plt.pause(0.05)
+    plt.pause(10)
 
-animation = FuncAnimation(fig, update, interval=1000, repeat = True)
+
+animation = FuncAnimation(fig, update)
+
+# writergif = PillowWriter(fps=0.1) 
+# animation.save("animation.gif" , writer=writergif)
+
 plt.show()
